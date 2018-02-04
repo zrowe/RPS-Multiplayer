@@ -1,0 +1,81 @@
+html {
+
+    height: 100%;
+    background: url(../images/background.jpg) no-repeat center fixed;
+    background-size: cover;
+}
+
+body {
+    color: black;
+    font-size: 16px;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+main {
+    max-width: 650px;
+    background-color: white;
+    margin: auto;
+}
+
+
+button {
+    padding: 20px 80px;
+    background-color: inherit;
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: none;
+}
+
+button:hover {
+    background-color: yellow;
+    border: 1px solid black;
+    border-style: solid;
+}
+
+.btn-wrapper {
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    padding: 20px;
+}
+
+
+.debug {
+    /*  border: 1px solid; */
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    font-size: 50px;
+}
+
+#time-remaining,
+#question,
+#outcome,
+#answer,
+#scoreboard {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.hide {
+    display: none;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
