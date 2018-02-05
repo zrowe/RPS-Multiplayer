@@ -9,6 +9,64 @@
   };
   firebase.initializeApp(config);
 
-  var dataRef = firebase.database();
+  var database = firebase.database();
 
-  
+  // Initial Values
+
+  var numConnections = 0; // number of connections
+  var name = "";
+  var email = "";
+  var age = 0;
+  var comment = "";
+
+
+  // All of our connections will be stored in this directory.
+  var connectionsRef = database.ref("/connections");
+  var connectedRef = database.ref(".info/connected");
+
+  // When the client's connection state changes...
+  connectedRef.on("value", function(snap) {
+      // If they are connected..
+      if (snap.val()) {
+          // Add user to the connections list.
+          var con = connectionsRef.push(true);
+          // Remove user from the connection list when they disconnect.
+          con.onDisconnect().remove();
+      }
+  });
+
+  // When first loaded or when the connections list changes...
+  connectionsRef.on("value", function(snap) {
+
+      // The number of online users is the number of children in the connections list.
+      // if less than 3 connections, I am a player
+      // otherwise I am waiting to play and there are numChildren-2 waiting
+      numConnections = (snap.numChildren());
+      console.log(numConnections);
+
+      //  $("#watchers").text(snap.numChildren());
+  });
+
+
+  // ========================================
+  // Start Button Click
+  $("#add-user").on("click", function(event) {
+      event.preventDefault();
+
+
+      // Don't forget to provide initial data to your Firebase database.
+      name = $("#name-input").val().trim();
+      email = $("#email-input").val().trim();
+      age = $("#age-input").val().trim();
+      comment = $("#comment-input").val().trim();
+
+      // Code for the push
+      dataRef.ref().push({
+
+          name: name,
+          email: email,
+          age: age,
+          comment: comment,
+          dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });
+  });
