@@ -1,3 +1,5 @@
+  var debug = 1 // my handy console debug flag
+
   // Initialize Firebase
   var config = {
       apiKey: "AIzaSyAPxhfFl_Yf_ZCoNC9iewYcA7WU2BQ26zk",
@@ -44,8 +46,24 @@
       numConnections = (snap.numChildren());
       console.log(numConnections);
 
+      if (numConnections < 3) {
+          initializePlayer();
+      } else {
+          placeOnWaitlist();
+      }
       //  $("#watchers").text(snap.numChildren());
   });
+
+  function initializePlayer() {
+      if (debug) { console.log("function initializePlayer: "); }
+
+  }
+
+  function placeOnWaitlist() {
+      if (debug) { console.log("function placeOnWaitlist: "); }
+
+  }
+
 
 
   // ========================================
